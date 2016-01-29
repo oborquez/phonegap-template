@@ -128,6 +128,7 @@
             var getCategorias = function()
             {
                 var ip = $("#ipaddress").val();
+                alert(ip);
                 $.getJSON("http://"+ip+"/yii2/basic/web/index.php?r=categorias/getcats",function(r){
                     alert("here");
                     $.each(r,function(k,cat){
