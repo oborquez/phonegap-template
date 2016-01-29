@@ -8,7 +8,7 @@
         <link rel="stylesheet"  href="libs/jQM-flat/jquery.mobile.flatui.css">
         <link rel="stylesheet" type="text/css" href="css/index.css" />
 
-        <title>App Name</title>
+        <title>Repe</title>
     </head>
     <body>
         <div id="app">
@@ -17,18 +17,18 @@
                     <div id="logoContainer" class="centerText">
                             <img src="img/logo.png" id="logo"  />
                         </div>
+                    
                     <div id="menu">
-                        <a data-icon="flat-heart" data-theme="d" href="#second-page" data-role="button">Second Page</a>
-                        <a data-icon="flat-time" data-theme="f" href="#due-page"  data-role="button">Fake Btn</a>
-                        <fieldset class="ui-grid-a">
-                            <div class="ui-block-a"> <a data-icon="flat-checkround" data-theme="e" href="#tips-page"  data-role="button">Fake Btn</a></div>
-                            <div class="ui-block-b"><a data-icon="ms-question" data-theme="g" href="#about-page"  data-role="button" >About</a></div>
-                        </fieldset>
-
+                        <input type="text" name="ipaddres" id="ipaddress" data-mini="true" placeholder="IP"/>
+                        <a data-icon="flat-checkround" data-theme="d" href="#webapp" data-role="button" onclick="getRepe()">Repe</a>
 
                     </div>
                 </div>
             </div><!-- /page  -->
+
+            <div id="webapp" data-role="page">
+                   <div id="repe"></div> 
+            </div>
 
             <div  id="second-page" data-role="page">
                 <div data-role="header" data-id="header" id="header" data-position="fixed" class="ui-header">
@@ -109,6 +109,12 @@
 
         <script type="text/javascript">
             app.initialize();
+            var getRepe = function()
+            {
+                var ip = $("#ipaddress").val();
+                $("#repe").load("http://"+ip+"/yii2/basic/web/index.php");
+
+            }
         </script>
     </body>
 </html>
