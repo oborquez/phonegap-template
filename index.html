@@ -129,7 +129,7 @@
             {
                 var ip = $("#ipaddress").val();
                 $.getJSON("http://"+ip+"/yii2/basic/web/index.php?r=categorias/getcats",function(r){
-                    
+                    alert("here");
                     $.each(r,function(k,cat){
                         var btn = '<a data-icon="flat-checkround" data-theme="f" href="#canciones" data-role="button" onclick="getCanciones('+cat.id+')">'+cat.nombre+'</a>';
                         $("#botones-categorias").append(btn).trigger('create');
