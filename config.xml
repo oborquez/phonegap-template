@@ -18,7 +18,9 @@
     </author>
 
     <preference name= "orientation" value = "portraint" />
-    <access origin="*" /> 
+    <gap:plugin name="cordova-plugin-whitelist" source="npm" />
+    <access origin="*"/>
+
 
 
 </widget>
