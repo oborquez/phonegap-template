@@ -19,16 +19,32 @@
                         </div>
                     
                     <div id="menu">
-                        <input type="text" name="ipaddres" id="ipaddress" data-mini="true" placeholder="IP"/>
-                        <a data-icon="flat-checkround" data-theme="d" href="#webapp" data-role="button" onclick="getRepe()">Repe</a>
+                        <input type="text" name="ipaddres" id="ipaddress" data-mini="true" value="192.168.0.39" placeholder="IP"/>
+                        <a data-icon="flat-checkround" data-theme="f" href="#categorias" data-role="button" onclick="getCategorias()">Repe</a>
 
                     </div>
                 </div>
             </div><!-- /page  -->
 
-            <div id="webapp" data-role="page">
-                   <div id="repe"></div> 
+            <div id="categorias" data-role="page">
+                <div data-role="header" data-id="header" id="header" data-position="fixed" class="ui-header">
+                    <a href="#home-page"  data-role="button" data-icon="arrow-l" data-inline="true" >Atrás</a>
+                    <h1>Categorías</h1>
+                </div>
+                <div data-role="content" id="botones-categorias">
+                       
+                </div>
+                
             </div>
+
+            <div id="canciones" data-role="page">
+                <div data-role="header" data-id="header" id="header" data-position="fixed" class="ui-header">
+                    <a href="#categorias"  data-role="button" data-icon="arrow-l" data-inline="true" >Atrás</a>
+                    <h1>Canciones</h1>
+                </div>
+                <div id="botones-canciones"></div>     
+            </div>
+
 
             <div  id="second-page" data-role="page">
                 <div data-role="header" data-id="header" id="header" data-position="fixed" class="ui-header">
@@ -109,13 +125,47 @@
 
         <script type="text/javascript">
             app.initialize();
-            var getRepe = function()
+            var getCategorias = function()
             {
                 var ip = $("#ipaddress").val();
-               // $("#repe").load("http://"+ip+"/yii2/basic/web/index.php");
-                $("#repe").load("http://grupolatins.com");
+                $.getJSON("http://"+ip+"/yii2/basic/web/index.php?r=categorias/getcats",function(r){
+                    
+                    $.each(r,function(k,cat){
+                        var btn = '<a data-icon="flat-checkround" data-theme="f" href="#canciones" data-role="button" onclick="getCanciones('+cat.id+')">'+cat.nombre+'</a>';
+                        $("#botones-categorias").append(btn).trigger('create');
+                        
+                    })
+                    
+                });
+                
 
             }
+
+            var getCanciones = function(cat)
+            {
+                var ip = $("#ipaddress").val();
+                $.getJSON("http://"+ip+"/yii2/basic/web/index.php?r=categorias/getcanciones&cat="+cat,function(r){
+                    
+                    $.each(r,function(k,can){
+                        var btn = '<a data-icon="flat-checkround" data-theme="f" data-role="button" onclick="turno('+can.id+')">'+can.nombre+'</a>';
+                        $("#botones-canciones").append(btn).trigger('create');
+                        
+                    })
+                    
+                });
+                
+
+            }
+
+    
+            var turno = function(id)
+            {
+                var ip = $("#ipaddress").val();
+                $.getJSON( "http://"+ip+"/yii2/basic/web/index.php?r=categorias/turno&id="+id,function(r){
+                    console.log(r);
+                })
+            }
+
         </script>
     </body>
 </html>
