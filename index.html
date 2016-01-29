@@ -125,51 +125,22 @@
 
         <script type="text/javascript">
             app.initialize();
+           
             var getCategorias = function()
             {
-                var ip = $("#ipaddress").val();
-                
+               var ip = $("#ipaddress").val();
                var url = "http://"+ip+"/yii2/basic/web/index.php?r=categorias/getcats";
-                /*  $.getJSON("http://"+ip+"/yii2/basic/web/index.php?r=categorias/getcats",function(r){
-                    alert("here");
+               //var url = "data.html";
+                 $.getJSON(url,function(r){
+                    
                     $.each(r,function(k,cat){
                         var btn = '<a data-icon="flat-checkround" data-theme="f" href="#canciones" data-role="button" onclick="getCanciones('+cat.id+')">'+cat.nombre+'</a>';
                         $("#botones-categorias").append(btn).trigger('create');
                         
                     })
                     
-                });*/
-                // Using YQL and JSONP
-                $.ajax({
-                    url: "http://"+ip+"/yii2/basic/web/index.php?r=categorias/getcats",
-                 
-                    // The name of the callback parameter, as specified by the YQL service
-                    //jsonp: "callback",
-                 
-                    // Tell jQuery we're expecting JSONP
-                    dataType: "json",
-                 
-                    // Tell YQL what we want and that we want JSON
-                    data: {
-                        q: "select title,abstract,url from search.news where query=\"cat\"",
-                        format: "json"
-                    },
-                 
-                    // Work with the response
-                    success: function( response ) {
-                        //console.log( response ); // server response
-                        alert("here");
-                    },
-
-                    error : function(e){
-                        console.log(url);
-                        console.log("error");
-                        console.log(e);
-                    }
-
-
-                });                
-
+                });
+              
             }
 
             var getCanciones = function(cat)
