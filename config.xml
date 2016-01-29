@@ -18,6 +18,7 @@
     </author>
 
     <preference name= "orientation" value = "portraint" />
+    <access origin="*" />
 
 
 </widget>
