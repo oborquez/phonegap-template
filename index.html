@@ -15,65 +15,13 @@
             <div id="home-page" data-role="page">
 
                 <div data-role="content" >
-                    <div id="logoContainer" class="centerText">
-                            <img src="img/logo.png" id="logo"  />
-                        </div>
-                    <div id="menu">
-                        <a data-icon="flat-heart" data-theme="a" href="#second-page" data-role="button">Formulario</a>
-                        <a data-icon="flat-list" data-theme="a" href="#list-page" data-role="button">Lista</a>
 
+                    <div id="response"></div>
 
-                    </div>
                 </div>
             </div><!-- /page  -->
 
-            <div  id="second-page" data-role="page">
-                <div data-role="header" data-id="header" id="header" data-position="fixed" class="ui-header">
-                    <a href="#home-page"  data-role="button" data-icon="arrow-l" data-inline="true" >Back</a>
-                    <h1>Sample Form</h1>
-                </div>
-                <div data-role="content" >
-                    <form id="form">
-                        <label for="nombre">Nombre</label>
-                        <input type="text" id="nombre">
-                        <label for="nombre">Edad</label>
-                        <input type="text" id="edad">
-                        <a data-icon="flat-save" data-theme="b" onclick="addUser()" data-role="button">Guardar</a>
-                    </form>
-                </div>
-                <div id="footer" data-role="footer" data-id="footer1" data-position="fixed" data-tap-toggle="false">
-                    <div id="navbar" data-role="navbar">
-                        <ul>
-                            <li><a id="map-button" href="#second-page" data-icon="flat-location" data-theme="b">Map</a></li>
-                            <li><a id="list-button" href="#list-page" data-icon="flat-menu">List</a></li>
-                            <li><a id="search-button" href="#search-page" data-icon="ms-search">Search</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            <div  id="list-page" data-role="page">
-                <div data-role="header" data-id="header1" data-position="fixed" class="ui-header">
-                    <a href="#" data-rel="back" data-role="button" data-icon="arrow-l" data-inline="true" >Back</a>
-                    <h1>About App</h1>
-                </div>
-                <div data-role="content"  class="big-text">
-                    <table data-role="table" data-mode="columntoggle" class="ui-responsive" >
-                        <thead>
-                            <tr>
-                                <th>
-                                    Nombre
-                                </th>
-                                <th>
-                                    Edad
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody id="tb-users"></tbody>
-                    </table>
-                </div>
-            </div>
+            
         </div>
 
 
@@ -90,6 +38,33 @@
         <script type="text/javascript">
             app.initialize();
             document.addEventListener("deviceready", onDeviceReady, false);
+
+            function onDeviceReady() {
+                
+                 var url = "http://192.168.0.35/yii2/basic/web/index.php?r=categorias/getcats";
+
+                
+
+                 $.ajax({
+                      type: 'GET',
+                      url:  url,
+                      success: function(plane, textStatus, jqXHR) {
+                        var data = JSON.parse(plane);
+                        $.each(data,function(k,cat){
+                            var btn = '<a data-icon="flat-checkround" data-theme="f" href="#canciones" data-role="button" onclick="getCanciones('+cat.id+')">'+cat.nombre+'</a>';
+                            $("#response").append(btn).trigger('create');
+                            
+                        })
+                      }, 
+                      error: function(jqXHR, textStatus, errorThrown) { 
+                        alert('Ha ocurrido un error '+textStatus); 
+                      }
+                    });  
+
+            }
+
+
+
         </script>
     </body>
 </html>
