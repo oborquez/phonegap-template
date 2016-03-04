@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, target-densitydpi=medium-dpi" />
-	<!-- HELLO  -->
+    <!-- HELLO  -->
         <link rel="stylesheet"  href="libs/jQM-flat/jquery.mobile.flatui.css">
         <link rel="stylesheet" type="text/css" href="css/index.css" />
 
@@ -23,6 +23,7 @@
                         <a data-icon="flat-checkround" data-theme="f" href="#categorias" data-role="button" onclick="getCategorias()">Repe</a>
 
                     </div>
+                    
                 </div>
             </div><!-- /page  -->
 
@@ -123,5 +124,51 @@
 
         <script type="text/javascript" src="js/index.js"></script>
 
+        <script type="text/javascript">
+            //app.initialize();
+           
+            var getCategorias = function()
+            {
+               var ip = $("#ipaddress").val();
+               var url = "http://"+ip+"/yii2/basic/web/index.php?r=categorias/getcats";
+               //var url = "data.html";
+                 $.getJSON(url,function(r){
+                    
+                    $.each(r,function(k,cat){
+                        var btn = '<a data-icon="flat-checkround" data-theme="f" href="#canciones" data-role="button" onclick="getCanciones('+cat.id+')">'+cat.nombre+'</a>';
+                        $("#botones-categorias").append(btn).trigger('create');
+                        
+                    })
+                    
+                });
+              
+            }
+
+            var getCanciones = function(cat)
+            {
+                var ip = $("#ipaddress").val();
+                $.getJSON("http://"+ip+"/yii2/basic/web/index.php?r=categorias/getcanciones&cat="+cat,function(r){
+                    
+                    $.each(r,function(k,can){
+                        var btn = '<a data-icon="flat-checkround" data-theme="f" data-role="button" onclick="turno('+can.id+')">'+can.nombre+'</a>';
+                        $("#botones-canciones").append(btn).trigger('create');
+                        
+                    })
+                    
+                });
+                
+
+            }
+
+    
+            var turno = function(id)
+            {
+                var ip = $("#ipaddress").val();
+                $.getJSON( "http://"+ip+"/yii2/basic/web/index.php?r=categorias/turno&id="+id,function(r){
+                    console.log(r);
+                })
+            }
+
+        </script>
     </body>
 </html>
