@@ -147,12 +147,10 @@
                       success: function(plane, textStatus, jqXHR) {
                         var data = JSON.parse(plane);
                         $.each(data,function(k,cat){
-
                             var btn = '<a data-icon="flat-checkround" data-theme="f" href="#canciones" data-role="button" onclick="getCanciones('+cat.id+')">'+cat.nombre+'</a>';
                             $("#botones-categorias").append(btn).trigger('create');
                             
                         })
-
                       }, 
                       error: function(jqXHR, textStatus, errorThrown) { 
                         alert('Ha ocurrido un error '+textStatus); 
@@ -160,7 +158,6 @@
                     });                  
                               
             }
-
             var getCanciones = function(cat)
             {
                 var ip = $("#ipaddress").val();
@@ -174,9 +171,7 @@
                     
                 });
                 
-
             }
-
     
             var turno = function(id)
             {
@@ -185,7 +180,6 @@
                     console.log(r);
                 })
             }
-
         </script>
     </body>
 </html>
