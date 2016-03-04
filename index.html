@@ -33,13 +33,12 @@
 
         <script type="text/javascript" src="js/index.js"></script>
 
-        <script type="text/javascript" src="js/storage.js"></script>
 
         <script type="text/javascript">
             app.initialize();
-            document.addEventListener("deviceready", onDeviceReady, false);
+            document.addEventListener("deviceready", appjson, false);
 
-            function onDeviceReady() {
+            function appjson() {
                 
                  var url = "http://192.168.0.35/yii2/basic/web/index.php?r=categorias/getcats";
 
